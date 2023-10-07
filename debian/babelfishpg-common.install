@@ -1,0 +1,3 @@
+contrib/babelfishpg_common/babelfishpg_common.so usr/lib/postgresql/15/lib
+contrib/babelfishpg_common/babelfishpg_common.control usr/share/postgresql/15/extension
+contrib/babelfishpg_common/sql/babelfishpg_common--*.sql usr/share/postgresql/15/extension

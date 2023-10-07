@@ -1,0 +1,4 @@
+contrib/babelfishpg_money/babelfishpg_money.so usr/lib/postgresql/15/lib
+contrib/babelfishpg_money/babelfishpg_money.control usr/share/postgresql/15/extension
+contrib/babelfishpg_money/babelfishpg_money--1.1.0.sql usr/share/postgresql/15/extension
+contrib/babelfishpg_money/fixeddecimal--1.0.0--1.1.0.sql usr/share/postgresql/15/extension

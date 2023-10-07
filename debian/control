@@ -1,0 +1,86 @@
+Source: wiltondb
+Priority: optional
+Maintainer: WiltonDB Software <info@wiltondb.com>
+Build-Depends:
+ libantlr4-runtime-dev (>= 1:4.9.3+wiltondb), 
+ bison,
+ cmake,
+ debhelper-compat (= 12),
+ flex,
+ libutfcpp-dev,
+ openjdk-17-jdk,
+ postgresql-common (>= 1:248+wiltondb3.3),
+ postgresql-server-dev-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-server-dev-15 (<< 1:15.5),
+Standards-Version: 4.5.0
+Section: libs
+Homepage: https://wiltondb.com/
+Vcs-Browser: https://github.com/wiltondb/babelfish_extensions
+Vcs-Git: https://github.com/wiltondb/babelfish_extensions.git
+
+Package: babelfishpg-money
+Architecture: any
+Depends:
+ postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (<< 1:15.5),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: This is a variation of the opensource fixeddecimal extension.
+ FixedDecimal is a fixed precision decimal type which provides a subset of
+ the features of PostgreSQL's builtin NUMERIC type, but with vastly increased
+ performance. Fixeddecimal is targeted to cases where performance and disk
+ space are a critical.
+ .
+ This package contains the babelfishpg_money PostgreSQL extension.
+
+Package: babelfishpg-common
+Architecture: any
+Depends:
+ postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (<< 1:15.5),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: Supports NUMERIC, VARBINARY and other datatypes.
+ .
+ This package contains the babelfishpg_common PostgreSQL extension.
+
+Package: babelfishpg-tds
+Architecture: any
+Depends:
+ postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (<< 1:15.5),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: Supports Tabular Data Stream (TDS) protocol.
+ .
+ This package contains the babelfishpg_tds PostgreSQL extension.
+
+Package: babelfishpg-tsql
+Architecture: any
+Depends:
+ postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (<< 1:15.5),
+ babelfishpg-common (= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: Supports Transact-SQL (T-SQL) language.
+ .
+ This package contains the babelfishpg_tsql PostgreSQL extension.
+
+Package: wiltondb
+Architecture: any
+Depends:
+ postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (<< 1:15.5),
+ babelfishpg-money (= ${binary:Version}),
+ babelfishpg-common (= ${binary:Version}),
+ babelfishpg-tds (= ${binary:Version}),
+ babelfishpg-tsql (= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: WiltonDB uses a set of Babelfish extensions ti provide the
+ capability for PostgreSQL to understand queries from applications written
+ for Microsoft SQL Server. WiltonDB understands the SQL Server wire-protocol
+ and T-SQL, the Microsoft SQL Server query language.
+ .
+ This package contains the Babelfish PostgreSQL extensions.

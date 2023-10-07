@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS=optimize=-lto
+export PG_SRC = $(CURDIR)/../postgresql_modified_for_babelfish
+export PG_CONFIG = /usr/bin/pg_config
+
+%:
+	dh $@
+
+override_dh_install:
+	dh_install
+#	dh_install -plibantlr4-runtime$(DEB_VERSION_UPSTREAM_ORIG) \
+		'usr/lib/*.so.*' usr/lib/$(DEB_HOST_MULTIARCH)
+
+override_dh_auto_clean:
+	dh_auto_clean
+
+override_dh_auto_build:
+	VPATH=$(CURDIR)/contrib/babelfishpg_money \
+		$(MAKE) -C $(CURDIR)/contrib/babelfishpg_money
+	VPATH=$(CURDIR)/contrib/babelfishpg_common \
+		$(MAKE) -C $(CURDIR)/contrib/babelfishpg_common
+	VPATH=$(CURDIR)/contrib/babelfishpg_tds \
+		$(MAKE) -C $(CURDIR)/contrib/babelfishpg_tds
+	VPATH=$(CURDIR)/contrib/babelfishpg_tsql \
+		ANTLR4_JAVA_BIN=/usr/bin/java \
+		cmake=cmake \
+		$(MAKE) -C $(CURDIR)/contrib/babelfishpg_tsql
+
