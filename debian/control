@@ -8,7 +8,7 @@ Build-Depends:
  debhelper-compat (= 12),
  flex,
  libutfcpp-dev,
- openjdk-17-jdk,
+ openjdk-17-jre,
  postgresql-common (>= 1:248+wiltondb3.3),
  postgresql-server-dev-15 (>= 1:15.4+wiltondb3.3),
  postgresql-server-dev-15 (<< 1:15.5),
@@ -68,7 +68,7 @@ Description: Supports Transact-SQL (T-SQL) language.
  This package contains the babelfishpg_tsql PostgreSQL extension.
 
 Package: wiltondb
-Architecture: any
+Architecture: all
 Depends:
  postgresql-15 (>= 1:15.4+wiltondb3.3),
  postgresql-15 (<< 1:15.5),
@@ -78,9 +78,10 @@ Depends:
  babelfishpg-tsql (= ${binary:Version}),
  ${shlibs:Depends},
  ${misc:Depends},
-Description: WiltonDB uses a set of Babelfish extensions ti provide the
+Description: Uses a set of Babelfish extensions to provide the
  capability for PostgreSQL to understand queries from applications written
  for Microsoft SQL Server. WiltonDB understands the SQL Server wire-protocol
  and T-SQL, the Microsoft SQL Server query language.
  .
  This package contains the Babelfish PostgreSQL extensions.
+ 

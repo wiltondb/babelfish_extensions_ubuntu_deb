@@ -1,7 +1,6 @@
 #!/usr/bin/make -f
 
-export DEB_BUILD_MAINT_OPTIONS=optimize=-lto
-export PG_SRC = $(CURDIR)/../postgresql_modified_for_babelfish
+export PG_SRC = $(CURDIR)/postgresql_modified_for_babelfish
 export PG_CONFIG = /usr/bin/pg_config
 
 %:
@@ -24,6 +23,5 @@ override_dh_auto_build:
 		$(MAKE) -C $(CURDIR)/contrib/babelfishpg_tds
 	VPATH=$(CURDIR)/contrib/babelfishpg_tsql \
 		ANTLR4_JAVA_BIN=/usr/bin/java \
-		cmake=cmake \
 		$(MAKE) -C $(CURDIR)/contrib/babelfishpg_tsql
 
