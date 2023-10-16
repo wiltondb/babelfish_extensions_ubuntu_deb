@@ -1,3 +1,9 @@
+wiltondb (3.3-2-2-1~UNRELEASED) UNRELEASED; urgency=medium
+
+  * Update to wiltondb3.3-2-2.
+
+ -- WiltonDB Software <info@wiltondb.com>  Mon, 16 Oct 2023 20:02:43 +0100
+
 wiltondb (3.3-1-1-5~UNRELEASED) UNRELEASED; urgency=medium
 
   * Initial WiltonDB 3.3 build.

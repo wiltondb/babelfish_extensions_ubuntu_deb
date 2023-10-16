@@ -17,7 +17,7 @@ Build-Depends:
  postgresql-server-dev-15 (>= 1:15.4+wiltondb3.3),
  postgresql-server-dev-15 (<< 1:15.5),
 Standards-Version: 4.5.0
-Section: libs
+Section: database
 Homepage: https://wiltondb.com/
 Vcs-Browser: https://github.com/wiltondb/babelfish_extensions
 Vcs-Git: https://github.com/wiltondb/babelfish_extensions.git

@@ -6,14 +6,6 @@ export PG_CONFIG = /usr/bin/pg_config
 %:
 	dh $@
 
-override_dh_install:
-	dh_install
-#	dh_install -plibantlr4-runtime$(DEB_VERSION_UPSTREAM_ORIG) \
-		'usr/lib/*.so.*' usr/lib/$(DEB_HOST_MULTIARCH)
-
-override_dh_auto_clean:
-	dh_auto_clean
-
 override_dh_auto_build:
 	VPATH=$(CURDIR)/contrib/babelfishpg_money \
 		$(MAKE) -C $(CURDIR)/contrib/babelfishpg_money
