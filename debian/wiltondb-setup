@@ -1,0 +1,128 @@
+#!/usr/bin/bash
+#
+# witondb-setup - Initialization operations for WiltonDB
+
+pgversion=15
+pgdata=/var/lib/postgresql/$pgversion/main
+pgconf=/etc/postgresql/$pgversion/main
+setup_log=$pgdata/wiltondb_setup.log
+
+if test "$(id -u)" -eq 0; then
+    cmd=$(printf %q "$(readlink -f "$0")")
+    for arg; do cmd+=" $(printf %q "$arg")" ; done
+
+    . /usr/share/postgresql-common/maintscripts-functions
+    set_system_locale
+    pg_createcluster -u postgres --no-status $pgversion main
+    if test $? -ne 0; then
+        echo >&2 "ERROR: pg_createcluster failure, path: $pgdata"
+        exit 1
+    fi
+
+    # Drop root privileges and switch to 'postgres' user
+    exec /usr/sbin/runuser -s /bin/sh -l postgres -c "$cmd"
+fi
+
+error() {
+    echo "ERROR: $@" >> $setup_log
+    echo >&2 "ERROR: $@, setup log: $setup_log"
+    exit 1
+}
+
+info() {
+    echo "$@" >> $setup_log
+    echo >&2 "$@"
+}
+
+info_log() {
+    echo "$@" >> $setup_log
+}
+
+warn() {
+    echo >&2 "WARNING: $@"
+}
+
+#export PATH=$PATH:/usr/sbin/
+
+# allow pg_ctl to be used
+ln -s $pgconf/postgresql.conf $pgdata/postgresql.conf
+ln -s $pgconf/conf.d $pgdata/conf.d
+
+umask 0077
+
+info "initializing WiltonDB"
+
+info_log "updating pg_hba.conf" >> $setup_log
+sed -i "s|^\(host\s*all\s*all\s*\)127.0.0.1/32\s*scram-sha-256$|\10.0.0.0/0               md5|" $pgconf/pg_hba.conf
+sed -i "s|^\(host\s*all\s*all\s*\)::1/128\s*scram-sha-256$|\1::0/0                   md5|" $pgconf/pg_hba.conf
+hba_replaced_count=$(grep "\(0.0.0.0/0\|::0/0\)\s*md5" $pgconf/pg_hba.conf | wc -l)
+if test $hba_replaced_count -ne 2; then
+    error "can not change settings in $pgconf/pg_hba.conf"
+fi
+
+info_log "generating certificate" >> $setup_log
+# https://www.postgresql.org/docs/15/ssl-tcp.html
+pushd $pgdata >> $setup_log
+openssl req \
+    -new \
+    -x509 \
+    -days 3650 \
+    -nodes \
+    -text \
+    -batch \
+    -out server.crt \
+    -keyout server.key \
+    -subj /CN=localhost \
+    >> $setup_log 2>&1
+if test $? -ne 0; then
+    popd >> $setup_log
+    error "can not generate certificate"
+fi
+
+info_log "starting postgres" >> $setup_log
+# https://www.postgresql.org/message-id/87zj93agba.fsf%40news-spur.riddles.org.uk
+/usr/lib/postgresql/$pgversion/bin/pg_ctl start -D $pgdata >> $setup_log 2>&1
+if test $? -ne 0; then
+    error "pg_ctl start failure"
+fi
+
+info_log "running psql part 1" >> $setup_log
+/usr/bin/psql -U postgres -d postgres -a << EOF >> $setup_log 2>&1
+ALTER SYSTEM SET max_connections = 256;
+ALTER SYSTEM SET ssl = ON;
+ALTER SYSTEM SET shared_preload_libraries = 'babelfishpg_tds';
+CREATE USER wilton WITH SUPERUSER CREATEDB CREATEROLE PASSWORD 'wilton' INHERIT;
+CREATE DATABASE wilton OWNER wilton;
+EOF
+if test $? -ne 0; then
+    /usr/lib/postgresql/$pgversion/bin/pg_ctl stop -D $pgdata >> $setup_log 2>&1
+    error "psql part 1 failure"
+fi
+warn "DB superuser 'wilton' was created with password 'wilton', please change the password before allowing remote connections."
+
+info_log "restarting postgres" >> $setup_log
+/usr/lib/postgresql/$pgversion/bin/pg_ctl restart -D $pgdata >> $setup_log 2>&1
+if test $? -ne 0; then
+    error "pg_ctl restart failure"
+fi
+
+info_log "running psql part 2" >> $setup_log
+/usr/bin/psql -U postgres -d wilton -a << EOF >> $setup_log 2>&1
+CREATE EXTENSION IF NOT EXISTS babelfishpg_tds CASCADE;
+GRANT ALL ON SCHEMA sys to wilton;
+ALTER SYSTEM SET babelfishpg_tsql.database_name = 'wilton';
+ALTER DATABASE wilton SET babelfishpg_tsql.migration_mode = 'multi-db';
+SELECT pg_reload_conf();
+CALL sys.initialize_babelfish('wilton');
+EOF
+if test $? -ne 0; then
+    /usr/lib/postgresql/$pgversion/bin/pg_ctl stop -D $pgdata >> $setup_log 2>&1
+    error "psql part 2 failure"
+fi
+
+/usr/lib/postgresql/$pgversion/bin/pg_ctl stop -D $pgdata >> $setup_log 2>&1
+if test $? -ne 0; then
+    error "pg_ctl stop failure"
+fi
+
+info "initialized, use 'systemctl start postgresql' to start the server"

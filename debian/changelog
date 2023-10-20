@@ -1,17 +1,23 @@
+wiltondb (3.3-2-3-2~UNRELEASED) UNRELEASED; urgency=medium
+
+  * Setup script added
+
+ -- WiltonDB Software <info@wiltondb.com>  Fri, 20 Oct 2023 10:15:33 +0000
+
 wiltondb (3.3-2-3-1~UNRELEASED) UNRELEASED; urgency=medium
 
-  * Update to wiltondb3.3-2-3.
+  * Update to wiltondb3.3-2-3
 
  -- WiltonDB Software <info@wiltondb.com>  Tue, 17 Oct 2023 10:17:16 +0000
 
 wiltondb (3.3-2-2-1~UNRELEASED) UNRELEASED; urgency=medium
 
-  * Update to wiltondb3.3-2-2.
+  * Update to wiltondb3.3-2-2
 
  -- WiltonDB Software <info@wiltondb.com>  Mon, 16 Oct 2023 20:02:43 +0100
 
 wiltondb (3.3-1-1-5~UNRELEASED) UNRELEASED; urgency=medium
 
-  * Initial WiltonDB 3.3 build.
+  * Initial WiltonDB 3.3 build
 
  -- WiltonDB Software <info@wiltondb.com>  Fri, 06 Oct 2023 13:47:00 +0100
