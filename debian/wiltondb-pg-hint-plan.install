@@ -1,0 +1,3 @@
+extensions/pg_hint_plan/pg_hint_plan.so usr/lib/postgresql/15/lib
+extensions/pg_hint_plan/pg_hint_plan.control usr/share/postgresql/15/extension
+extensions/pg_hint_plan/pg_hint_plan--*.sql usr/share/postgresql/15/extension

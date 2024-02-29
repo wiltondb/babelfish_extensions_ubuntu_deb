@@ -1,0 +1,3 @@
+extensions/tds_fdw/tds_fdw.so usr/lib/postgresql/15/lib
+extensions/tds_fdw/tds_fdw.control usr/share/postgresql/15/extension
+extensions/tds_fdw/sql/tds_fdw--*.sql usr/share/postgresql/15/extension

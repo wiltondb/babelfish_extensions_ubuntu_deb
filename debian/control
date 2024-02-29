@@ -7,6 +7,7 @@ Build-Depends:
  cmake,
  debhelper-compat (= 12),
  flex,
+ freetds-dev,
  libicu-dev,
  libkrb5-dev,
  libssl-dev,
@@ -71,6 +72,31 @@ Description: Supports Transact-SQL (T-SQL) language.
  .
  This package contains the babelfishpg_tsql PostgreSQL extension.
 
+Package: wiltondb-pg-hint-plan
+Architecture: any
+Depends:
+ postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (<< 1:15.5),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: Makes it possible to tweak execution plans
+ using so-called "hints" in SQL comments.
+ .
+ This package contains the pg_hint_plan PostgreSQL extension.
+
+Package: wiltondb-tds-fdw
+Architecture: any
+Depends:
+ postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (<< 1:15.5),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description:  PostgreSQL foreign data wrapper that can connect to databases
+ that use the Tabular Data Stream (TDS) protocol, such as Sybase databases
+ and Microsoft SQL server.
+ .
+ This package contains the tds_fdw PostgreSQL extension.
+
 Package: wiltondb
 Architecture: all
 Depends:
@@ -80,6 +106,8 @@ Depends:
  babelfishpg-common (= ${binary:Version}),
  babelfishpg-tds (= ${binary:Version}),
  babelfishpg-tsql (= ${binary:Version}),
+ wiltondb-pg-hint-plan (= ${binary:Version}),
+ wiltondb-tds-fdw (= ${binary:Version}),
  ${shlibs:Depends},
  ${misc:Depends},
 Description: Uses a set of Babelfish extensions to provide the
