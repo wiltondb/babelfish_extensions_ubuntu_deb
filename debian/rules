@@ -16,4 +16,7 @@ override_dh_auto_build:
 	VPATH=$(CURDIR)/contrib/babelfishpg_tsql \
 		ANTLR4_JAVA_BIN=/usr/bin/java \
 		$(MAKE) -C $(CURDIR)/contrib/babelfishpg_tsql
-
+	VPATH=$(CURDIR)/extensions/pg_hint_plan \
+		$(MAKE) -C $(CURDIR)/extensions/pg_hint_plan
+	VPATH=$(CURDIR)/extensions/tds_fdw \
+		$(MAKE) -C $(CURDIR)/extensions/tds_fdw
