@@ -108,6 +108,7 @@ Depends:
  babelfishpg-tsql (= ${binary:Version}),
  wiltondb-pg-hint-plan (= ${binary:Version}),
  wiltondb-tds-fdw (= ${binary:Version}),
+ openssl,
  ${shlibs:Depends},
  ${misc:Depends},
 Description: Uses a set of Babelfish extensions to provide the
