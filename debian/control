@@ -120,6 +120,7 @@ Depends:
  babelfishpg-tsql (= ${binary:Version}),
  wiltondb-pg-hint-plan (= ${binary:Version}),
  wiltondb-tds-fdw (= ${binary:Version}),
+ wiltondb-system-stats (= ${binary:Version}),
  openssl,
  ${shlibs:Depends},
  ${misc:Depends},

@@ -1,3 +1,9 @@
+wiltondb (3.3-7-12-2~UNRELEASED) UNRELEASED; urgency=medium
+
+  * Include system_stats with default installation
+
+ -- WiltonDB Software <info@wiltondb.com>  Mon, 15 Apr 2024 21:48:46 +0100
+
 wiltondb (3.3-7-12-1~UNRELEASED) UNRELEASED; urgency=medium
 
   * Update to wiltondb3.3-7-12
