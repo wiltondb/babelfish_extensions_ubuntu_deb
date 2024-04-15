@@ -97,6 +97,18 @@ Description:  PostgreSQL foreign data wrapper that can connect to databases
  .
  This package contains the tds_fdw PostgreSQL extension.
 
+Package: wiltondb-system-stats
+Architecture: any
+Depends:
+ postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (<< 1:15.5),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description:  PostgreSQL extension that provides functions to access system
+ level statistics that can be used for monitoring.
+ .
+ This package contains the system_stats PostgreSQL extension.
+
 Package: wiltondb
 Architecture: all
 Depends:

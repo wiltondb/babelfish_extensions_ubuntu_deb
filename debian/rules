@@ -20,3 +20,5 @@ override_dh_auto_build:
 		$(MAKE) -C $(CURDIR)/extensions/pg_hint_plan
 	VPATH=$(CURDIR)/extensions/tds_fdw \
 		$(MAKE) -C $(CURDIR)/extensions/tds_fdw
+	VPATH=$(CURDIR)/extensions/system_stats \
+		$(MAKE) -C $(CURDIR)/extensions/system_stats
