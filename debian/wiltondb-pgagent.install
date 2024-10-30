@@ -1,0 +1,2 @@
+extensions/pgagent/build/dist/pgagent--4.2.sql usr/share/postgresql/15/extension
+extensions/pgagent/build/dist/pgagent.control usr/share/postgresql/15/extension

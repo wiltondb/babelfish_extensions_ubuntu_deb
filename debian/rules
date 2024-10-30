@@ -22,3 +22,11 @@ override_dh_auto_build:
 		$(MAKE) -C $(CURDIR)/extensions/tds_fdw
 	VPATH=$(CURDIR)/extensions/system_stats \
 		$(MAKE) -C $(CURDIR)/extensions/system_stats
+		pushd $(CURDIR)/extensions/pgagent
+		mkdir build
+		pishd build
+		cmake .. -DCMAKE_INSTALL_PREFIX=`pwd`/dist
+		make
+		make install
+		popd
+		popd
