@@ -13,6 +13,7 @@ Build-Depends:
  libssl-dev,
  libutfcpp-dev,
  libxml2-dev,
+ uuid-dev,
  openjdk-17-jre,
  postgresql-common (>= 1:248+wiltondb3.lts),
  postgresql-server-dev-15 (>= 1:15.4+wiltondb3.lts),
