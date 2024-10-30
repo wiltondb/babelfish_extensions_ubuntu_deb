@@ -1,3 +1,9 @@
+wiltondb (3.lts-12-16-1~UNRELEASED) UNRELEASED; urgency=medium
+
+  * Update to wiltondb3.lts-12-16
+
+ -- WiltonDB Software <info@wiltondb.com>  Wed, 30 Oct 2024 18:57:01 +0000
+
 wiltondb (3.3-11-15-1~UNRELEASED) UNRELEASED; urgency=medium
 
   * Update to wiltondb3.3-11-15

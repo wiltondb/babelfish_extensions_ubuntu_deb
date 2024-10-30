@@ -14,8 +14,8 @@ Build-Depends:
  libutfcpp-dev,
  libxml2-dev,
  openjdk-17-jre,
- postgresql-common (>= 1:248+wiltondb3.3),
- postgresql-server-dev-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-common (>= 1:248+wiltondb3.lts),
+ postgresql-server-dev-15 (>= 1:15.4+wiltondb3.lts),
  postgresql-server-dev-15 (<< 1:15.5),
 Standards-Version: 4.5.0
 Section: database
@@ -26,7 +26,7 @@ Vcs-Git: https://github.com/wiltondb/babelfish_extensions.git
 Package: babelfishpg-money
 Architecture: any
 Depends:
- postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (>= 1:15.4+wiltondb3.lts),
  postgresql-15 (<< 1:15.5),
  ${shlibs:Depends},
  ${misc:Depends},
@@ -41,7 +41,7 @@ Description: This is a variation of the opensource fixeddecimal extension.
 Package: babelfishpg-common
 Architecture: any
 Depends:
- postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (>= 1:15.4+wiltondb3.lts),
  postgresql-15 (<< 1:15.5),
  ${shlibs:Depends},
  ${misc:Depends},
@@ -52,7 +52,7 @@ Description: Supports NUMERIC, VARBINARY and other datatypes.
 Package: babelfishpg-tds
 Architecture: any
 Depends:
- postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (>= 1:15.4+wiltondb3.lts),
  postgresql-15 (<< 1:15.5),
  ${shlibs:Depends},
  ${misc:Depends},
@@ -63,7 +63,7 @@ Description: Supports Tabular Data Stream (TDS) protocol.
 Package: babelfishpg-tsql
 Architecture: any
 Depends:
- postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (>= 1:15.4+wiltondb3.lts),
  postgresql-15 (<< 1:15.5),
  babelfishpg-common (= ${binary:Version}),
  ${shlibs:Depends},
@@ -75,7 +75,7 @@ Description: Supports Transact-SQL (T-SQL) language.
 Package: wiltondb-pg-hint-plan
 Architecture: any
 Depends:
- postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (>= 1:15.4+wiltondb3.lts),
  postgresql-15 (<< 1:15.5),
  ${shlibs:Depends},
  ${misc:Depends},
@@ -87,7 +87,7 @@ Description: Makes it possible to tweak execution plans
 Package: wiltondb-tds-fdw
 Architecture: any
 Depends:
- postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (>= 1:15.4+wiltondb3.lts),
  postgresql-15 (<< 1:15.5),
  ${shlibs:Depends},
  ${misc:Depends},
@@ -100,7 +100,7 @@ Description:  PostgreSQL foreign data wrapper that can connect to databases
 Package: wiltondb-system-stats
 Architecture: any
 Depends:
- postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (>= 1:15.4+wiltondb3.lts),
  postgresql-15 (<< 1:15.5),
  ${shlibs:Depends},
  ${misc:Depends},
@@ -109,10 +109,21 @@ Description:  PostgreSQL extension that provides functions to access system
  .
  This package contains the system_stats PostgreSQL extension.
 
+Package: wiltondb-pgagent
+Architecture: any
+Depends:
+ postgresql-15 (>= 1:15.4+wiltondb3.lts),
+ postgresql-15 (<< 1:15.5),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description:  PostgreSQL sheduler extension
+ .
+ This package contains the pgagent PostgreSQL extension.
+
 Package: wiltondb
 Architecture: all
 Depends:
- postgresql-15 (>= 1:15.4+wiltondb3.3),
+ postgresql-15 (>= 1:15.4+wiltondb3.lts),
  postgresql-15 (<< 1:15.5),
  babelfishpg-money (= ${binary:Version}),
  babelfishpg-common (= ${binary:Version}),
@@ -121,6 +132,7 @@ Depends:
  wiltondb-pg-hint-plan (= ${binary:Version}),
  wiltondb-tds-fdw (= ${binary:Version}),
  wiltondb-system-stats (= ${binary:Version}),
+ wiltondb-pgagent (= ${binary:Version}),
  openssl,
  ${shlibs:Depends},
  ${misc:Depends},
